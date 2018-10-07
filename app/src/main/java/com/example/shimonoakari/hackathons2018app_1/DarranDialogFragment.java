@@ -25,8 +25,7 @@ public class DarranDialogFragment extends android.support.v4.app.DialogFragment 
 
     TextView difDaraanText;
     TextView daraanText;
-    ImageView darashibaGood;
-    ImageView darashibaBad;
+    ImageView darashibaImage;
 //    変数宣言
     int daraanPoints;
     int daraanPoints2;
@@ -78,17 +77,9 @@ public class DarranDialogFragment extends android.support.v4.app.DialogFragment 
         //ボタン表示
         Button next_Button = dialog.findViewById(R.id.nextButton);
         Button close_Button = dialog.findViewById(R.id.closeButton);
+        darashibaImage = dialog.findViewById(R.id.darashibaView);
 
-        //画像を表示させる
-        //imageView.setImageResource(画像のID)
-        //mImageView.setImageResource(R.drawable.rabbit);
-        if (daraanPoints2 > 0 ) {
-            darashibaBad = dialog.findViewById(R.id.darashibaView);
-            darashibaBad.setImageResource(R.drawable.darashiba5);
-        }else{
-            darashibaGood = dialog.findViewById(R.id.darashibaView);
-            darashibaGood.setImageResource(R.drawable.darashiba2);
-        }
+
 
         //だら〜んポイントを表示させる
         daraanPoints = getArguments().getInt("daraanPoint");
@@ -103,6 +94,15 @@ public class DarranDialogFragment extends android.support.v4.app.DialogFragment 
             fugo = "+";
         }else if(daraanPoints2 < 0){
             fugo = "-";
+        }
+
+        //画像を表示させる
+        //imageView.setImageResource(画像のID)
+        //mImageView.setImageResource(R.drawable.rabbit);
+        if (daraanPoints2 > 0 ) {
+            darashibaImage.setImageResource(R.drawable.darashiba5);
+        }else{
+            darashibaImage.setImageResource(R.drawable.darashiba2);
         }
 
         daraanText.setText("合計：" + daraanPoints + " " +"だらーん" + "！");

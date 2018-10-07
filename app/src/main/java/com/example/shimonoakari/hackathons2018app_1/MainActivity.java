@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements DialogFragment.On
     private FragmentManager flagmentManager;
     ImageButton timer_Button;
     ImageButton crown_Button;
-
+    int minutes;
 
     //import option + enter
     //return command + z
@@ -112,16 +112,21 @@ public class MainActivity extends AppCompatActivity implements DialogFragment.On
 //                Toast.makeText(MainActivity.this, chronometer.getText(), Toast.LENGTH_SHORT).show();
                 //(いる場所、表示させるもの、表示長さ)
                 register = chronometer.getText().toString();
+//                計測時間を：ごとに区切る
                 String[] separateRegister = register.split(":", 0);
                 Log.d("register", "0 = " + separateRegister[0] + "1 = " + separateRegister[1]);
-                int minutes = Integer.parseInt(separateRegister[0]);
+//                minutesは計測分
+                minutes = Integer.parseInt(separateRegister[0]);
+//                  secondsは計測秒
                 int seconds = Integer.parseInt(separateRegister[1]);
+//                secondsが30秒以上の場合計測分１増える
                 if (seconds >= 30) {
                     minutes = minutes + 1;
                 }
 
-                daraanPoint = ((minutes - (hour * 60 + minute)) / 5) * 2;
-//                ポイント換算
+                //                ポイント換算
+                daraanPoint = minutes - (hour * 60 + minute);
+
                 if (daraanPoint == 0) {
                     point = firstPoint - sameMokuhyouPoint - loginPoint;
                 } else {
