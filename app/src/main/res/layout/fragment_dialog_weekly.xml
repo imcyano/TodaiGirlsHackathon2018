@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialogTitleText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="今週のふりかえり"
+        android:textColor="#fff"
+        android:textSize="30dp" />
+
+    <!--だらしばが入る-->
+    <ImageView
+        android:id="@+id/weeklydarashiba"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/darashiba7" />
+
+    <!--自分の順位-->
+    <TextView
+        android:id="@+id/dialogMessageText1"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="0.7"
+        android:padding="10sp"
+        android:text="今週の順位："
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/dialogMessageText2"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:padding="10sp"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/dialogText4"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="0.7"
+        android:padding="10sp"
+        android:text="今週のだらーん："
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:padding="10sp"
+        android:textSize="36sp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="0.7"
+        android:padding="10sp"
+        android:text="ちなみにダラキングは..."
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:padding="10sp"
+        android:textSize="36sp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/close_button"
+            android:layout_width="0sp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border2"
+            android:text="閉じる"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/twitterButton"
+            android:layout_width="0sp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border2"
+            android:text="ツイートする"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!--1位のだらーん-->
+
+
+</LinearLayout>
