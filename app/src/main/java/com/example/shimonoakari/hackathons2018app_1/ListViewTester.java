@@ -1,20 +1,16 @@
 package com.example.shimonoakari.hackathons2018app_1;
 
 
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Slide;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,41 +26,24 @@ public class ListViewTester extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private String[] names =
             {"みゆ", "あみ", "ポール", "はると", "はるか", "ジョン", "キャサリン", "かな", "アシュリー", "たろう"};
+    private String[] namesNew = {"ジョン", "あみ", "ポール", "はると", "はるか", "みゆ", "キャサリン", "かな", "アシュリー", "たろう"};
+
     private int darang = 150;
     private TextView daraKing;
-    private ImageButton timerButton;
-    private ImageButton kingButton;
+    private TextView titleMain;
+
+    ListView listView;
+    LIstAdapterTest adapter;
+
+    ArrayList<ListContentTest> listItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        Slide slide = new Slide();
-        slide.setSlideEdge(Gravity.RIGHT);//もう一方ではRIGHTに変更
-        getWindow().setExitTransition(slide);
         setContentView(R.layout.activity_list_view_tester);
+        listView = findViewById(R.id.list);
 
-        timerButton = findViewById(R.id.timerButton);
-        kingButton = findViewById(R.id.kingButton);
-
-
-        timerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //遷移させる
-                Intent intent = new Intent(ListViewTester.this, MainActivity.class);
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ListViewTester.this, null).toBundle());
-
-            }
-        });
-
-        kingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //何もしない
-            }
-        });
-
+        //iconの名付け
         mIcon2 = findViewById(R.id.imageView2);
         mIcon3 = findViewById(R.id.imageView3);
         mButton = findViewById(R.id.button1);
@@ -75,7 +54,41 @@ public class ListViewTester extends AppCompatActivity {
         daraKing = findViewById(R.id.textView);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "yourfont.ttf");
         daraKing.setTypeface(typeface);
+        titleMain = findViewById(R.id.textView);
+        Log.i("test", "aaaaa");
 
+
+        //ダランキングの切り替わり
+        titleMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("test", "bbbbbb");
+                names = namesNew;
+                // リストビューに表示する要素(SampleListItemで定義したもの)を設定
+
+                for (int i = 0; i < 10; i++) {
+                    //　リストに表示するための値を変数に代入しておく
+
+                    int bmp = i + 1;
+                    String text1 = names[i];
+                    String text3 = String.valueOf(i + 1) + "位";
+                    String text2 = darang + "だらーん";
+                    darang = darang - 10;
+
+                    // SampleListItemにそれぞれの変数を格納する
+                    ListContentTest item = new ListContentTest(text3, bmp, text1, text2);
+                    // リストビューに表示するためのリストにアイテムを追加
+                    listItems.set(i, item);
+                    //余裕あれば１〜３位は豪華な画像、残りはシンプルな画像
+
+                }
+                adapter.notifyDataSetChanged();
+//                LIstAdapterTest adapter = new LIstAdapterTest(ListViewTester.this, R.layout.list_content_test, listItems);
+//                listView.setAdapter(adapter);
+
+
+            }
+        });
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,37 +114,36 @@ public class ListViewTester extends AppCompatActivity {
             }
         });
 
-        ListView listView = findViewById(R.id.list);
 
 
-        // リストビューに表示する要素(SampleListItemで定義したもの)を設定
 
-        ArrayList<ListContentTest> listItems = new ArrayList<>();
+
+
 
         // Adapterはリストにはめるだけ
-
+        // リストビューに表示する要素(SampleListItemで定義したもの)を設定
+        listItems = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-                //　リストに表示するための値を変数に代入しておく
+            //　リストに表示するための値を変数に代入しておく
 
-                int bmp = i + 1;
-                String text1 = names[i];
-                String text3 = String.valueOf(i + 1) + "位";
-                String text2 = "だらーん:" + darang;
-                darang = darang - 10;
+            int bmp = i + 1;
+            String text1 = names[i];
+            String text3 = String.valueOf(i + 1) + "位";
+            String text2 = darang + "だらーん";
+            darang = darang - 10;
 
-                // SampleListItemにそれぞれの変数を格納する
-                ListContentTest item = new ListContentTest(text3, bmp, text1, text2);
+            // SampleListItemにそれぞれの変数を格納する
+            ListContentTest item = new ListContentTest(text3, bmp, text1, text2);
 
-                // リストビューに表示するためのリストにアイテムを追加
-                listItems.add(item);
-                //余裕あれば１〜３位は豪華な画像、残りはシンプルな画像
+            // リストビューに表示するためのリストにアイテムを追加
+            listItems.add(item);
+            //余裕あれば１〜３位は豪華な画像、残りはシンプルな画像
 
-            }
+        }
 
 
-
-        LIstAdapterTest adapter = new LIstAdapterTest(this, R.layout.list_content_test, listItems);
+        adapter = new LIstAdapterTest(this, R.layout.list_content_test, listItems);
         listView.setAdapter(adapter);
 
     };
