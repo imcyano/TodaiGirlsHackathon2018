@@ -1,16 +1,18 @@
 package com.example.shimonoakari.hackathons2018app_1;
 
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v4.app.DialogFragment;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,6 +37,9 @@ public class ListViewTester extends AppCompatActivity {
     ListView listView;
     LIstAdapterTest adapter;
 
+    ImageButton timer_Button;
+    ImageButton crown_Button;
+
     ArrayList<ListContentTest> listItems;
 
     @Override
@@ -56,6 +61,27 @@ public class ListViewTester extends AppCompatActivity {
         daraKing.setTypeface(typeface);
         titleMain = findViewById(R.id.textView);
         Log.i("test", "aaaaa");
+
+        timer_Button = findViewById(R.id.timerButton);
+        crown_Button = findViewById(R.id.kingButton);
+
+        timer_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //遷移させる
+                Intent intent = new Intent(ListViewTester.this, MainActivity.class);
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ListViewTester.this, null).toBundle());
+            }
+        });
+
+        crown_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //何もしない
+            }
+
+        });
+
 
 
         //ダランキングの切り替わり
